@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>嘿嘿嘿</title>
+    <!-- 引入 layui.css -->
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+    <!-- 导入样式 -->
+    <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css"/>
+    <!-- 导入 Vue 3 -->
+    <script src="//unpkg.com/vue@next"></script>
+    <!-- 导入组件库 -->
+    <script src="//unpkg.com/element-plus"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <el-table :data="list" style="width: 100%">
+            <el-table-column prop="id" label="Date" width="180"/>
+            <el-table-column prop="name" label="Name" width="180"/>
+            <el-table-column prop="address" label="Address"/>
+        </el-table>
+    </div>
+    <table class="layui-table">
+        <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <td>姓名{{message}}</td>
+            <td>账号</td>
+            <td>密码</td>
+            <td>权限</td>
+            <th>状态变量：index</th>
+            <th>状态变量：count</th>
+            <th>状态变量：size</th>
+            <th>状态变量：even</th>
+            <th>状态变量：odd</th>
+            <th>状态变量：first</th>
+            <th>状态变量：last</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="info,infoStat : ${list}">
+            <td th:text="${info.id}"></td>
+            <td th:text="${info.getAccount()}"></td>
+            <td th:text="${info.getPassword()}"></td>
+            <td th:text="${info.getRole()}"></td>
+            <th th:text="${infoStat.index}"></th>
+            <th th:text="${infoStat.count}"></th>
+            <th th:text="${infoStat.size}"></th>
+            <th th:text="${infoStat.even}"></th>
+            <th th:text="${infoStat.odd}"></th>
+            <th th:text="${infoStat.first}"></th>
+            <th th:text="${infoStat.last}"></th>
+        </tr>
+        </tbody>
+    </table>
+
+    <el-row class="mb-4">
+        <el-button >Default</el-button>
+        <el-button type="primary">Primary</el-button>
+        <el-button type="success">Success</el-button>
+        <el-button type="info">Info</el-button>
+        <el-button type="warning">Warning</el-button>
+        <el-button type="danger">Danger</el-button>
+        <el-button>中文</el-button>
+    </el-row>
+
+    <el-row class="mb-4">
+        <el-button plain>Plain</el-button>
+        <el-button type="primary" plain>Primary</el-button>
+        <el-button type="success" plain>Success</el-button>
+        <el-button type="info" plain>Info</el-button>
+        <el-button type="warning" plain>Warning</el-button>
+        <el-button type="danger" plain>Danger</el-button>
+    </el-row>
+
+    <el-row class="mb-4">
+        <el-button round>Round</el-button>
+        <el-button type="primary" round>Primary</el-button>
+        <el-button type="success" round>Success</el-button>
+        <el-button type="info" round>Info</el-button>
+        <el-button type="warning" round>Warning</el-button>
+        <el-button type="danger" round>Danger</el-button>
+    </el-row>
+
+</div>
+</body>
+<script th:inline="javascript">
+    const App = {
+        data() {
+            return {
+                message: "Hello Element Plus",
+                list: [[${list}]]
+            };
+        },
+    };
+    const app = Vue.createApp(App);
+    app.use(ElementPlus);
+    app.mount("#app");
+</script>
+</html>
